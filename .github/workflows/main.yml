@@ -1,0 +1,31 @@
+name: DevOps Peoject 1 Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies 
+        run: npm install
+
+      - name: Verify Application
+        run: node app.js & sleep 5
+
+      - name: Build Docker Image
+        run: docker build -t devops-project-1 .  
+
