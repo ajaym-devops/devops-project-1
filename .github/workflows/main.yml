@@ -43,7 +43,9 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo docker pull invincibleajay/devops-project-1:latest
-            sudo docker stop devops-project-1 || true
-            sudo docker rm devops-project-1 || true
-            sudo docker run -d --name devops-project-1 -p 80:3000 invincibleajay/devops-project-1:latest
+             sudo docker pull invincibleajay/devops-project-1:latest
+
+             sudo docker stop $(sudo docker ps -q) || true
+             sudo docker rm $(sudo docker ps -aq) || true
+
+             sudo docker run -d --name devops-project-1 -p 80:3000 invincibleajay/devops-project-1:latest
